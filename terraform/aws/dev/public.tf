@@ -69,6 +69,12 @@ resource "aws_security_group" "web" {
 }
 
 resource "aws_instance" "web" {
+    connection={
+        user = "ubuntu"
+        key_file = "${var.aws_key_path}"
+        timeout = "1m"
+        agent = true
+    }
     ami = "${lookup(var.amis, var.aws_region)}"
     availability_zone = "eu-west-1a"
     instance_type = "t2.micro"
@@ -79,12 +85,6 @@ resource "aws_instance" "web" {
     source_dest_check = false
 
     provisioner "file" {
-#        connection {
-#          user = "ubuntu"
-#          host = "${aws_instance.web.public_ip}"
-#          timeout = "1m"
-#          key_file = "${var.aws_key_path}"
-#        }
         source = "go.sh"
         destination = "/home/ubuntu/go.sh"
     }
