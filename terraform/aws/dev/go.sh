@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # /home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}
 
@@ -44,9 +44,9 @@ while getopts ":s:u:p:r:g:a:v:" opt; do
 done
 
 
-sudo apt-get -yy update
-sudo apt-get -yy install git puppet
-sudo apt-get -yy install ruby-bundler
+sudo apt -yy update
+sudo apt -yy install git puppet
+sudo apt -yy install ruby-bundler
 
 git clone https://github.com/devops-studentXX/puppet.git
 
