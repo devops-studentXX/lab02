@@ -4,6 +4,30 @@ variable "aws_key_path" {}
 variable "aws_key_name" {}
 variable "aws_environment" {}
 
+variable "repo_url" {
+    default = "http://localhost:8081/nexus"
+}
+
+variable "repo_user" {}
+
+variable "repo_password" {}
+
+variable "app_group_id" {
+    default = "es.examplecorp"
+}
+
+variable "app_artifact_id" {
+    default = "MyApp"
+}
+
+variable "app_version" {
+    default = "1.0-SNAPSHOT"
+}
+
+variable "app_repository" {
+    default = "snapshots"
+}
+
 variable "aws_region" {
     description = "EC2 Region for the VPC"
     default = "eu-west-1"

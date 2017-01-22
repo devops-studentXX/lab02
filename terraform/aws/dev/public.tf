@@ -48,6 +48,18 @@ resource "aws_security_group" "web" {
         protocol  = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    egress {
+        from_port = 0
+        to_port   = 65535
+        protocol  = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = 0
+        to_port   = 65535
+        protocol  = "udp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
 
     vpc_id = "${aws_vpc.default.id}"
 
@@ -66,26 +78,26 @@ resource "aws_instance" "web" {
     associate_public_ip_address = true
     source_dest_check = false
 
-    #provisioner "file" {
-        #connection {
-          #user = "ubuntu"
-          #host = "${aws_instance.web.public_ip}"
-          #timeout = "1m"
-          #key_file = "${var.aws_key_path}"
-        #}
-        #source = "go.sh"
-        #destination = "/home/ubuntu/go.sh"
-    #}
-#
-    #provisioner "remote-exec" {
-        #connection {
-          #user = "ubuntu"
-          #host = "${aws_instance.web.public_ip}"
-          #timeout = "1m"
-          #key_file = "${var.aws_key_path}"
-        #}
-        #script = "go.sh"
-    #}
+    provisioner "file" {
+        connection {
+          user = "ubuntu"
+          host = "${aws_instance.web.public_ip}"
+          timeout = "1m"
+          key_file = "${var.aws_key_path}"
+        }
+        source = "go.sh"
+        destination = "/home/ubuntu/go.sh ${var.repo_url} ${var.repo_user} ${var.repo_password} ${var.app_repository} ${var.app_group_id} ${var.app_artifact_id} ${var.app_version}"
+    }
+
+    provisioner "remote-exec" {
+        connection {
+          user = "ubuntu"
+          host = "${aws_instance.web.public_ip}"
+          timeout = "1m"
+          key_file = "${var.aws_key_path}"
+        }
+        script = "go.sh"
+    }
 
 
     tags {
