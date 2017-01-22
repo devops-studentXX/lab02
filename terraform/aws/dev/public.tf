@@ -79,24 +79,27 @@ resource "aws_instance" "web" {
     source_dest_check = false
 
     provisioner "file" {
-        connection {
-          user = "ubuntu"
-          host = "${aws_instance.web.public_ip}"
-          timeout = "1m"
-          key_file = "${var.aws_key_path}"
-        }
+#        connection {
+#          user = "ubuntu"
+#          host = "${aws_instance.web.public_ip}"
+#          timeout = "1m"
+#          key_file = "${var.aws_key_path}"
+#        }
         source = "go.sh"
         destination = "/home/ubuntu/go.sh"
     }
 
     provisioner "remote-exec" {
-        connection {
-          user = "ubuntu"
-          host = "${aws_instance.web.public_ip}"
-          timeout = "1m"
-          key_file = "${var.aws_key_path}"
-        }
-        script = "bash go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}"
+#        connection {
+#          user = "ubuntu"
+#          host = "${aws_instance.web.public_ip}"
+#          timeout = "1m"
+#          key_file = "${var.aws_key_path}"
+#        }
+        inline = [
+          "chmod +x /home/ubuntu/go.sh",
+          "/home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}"
+        ]
     }
 
 
