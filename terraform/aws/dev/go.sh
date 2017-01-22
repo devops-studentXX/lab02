@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-# /home/ubuntu/go.sh -s ${var.repo_url} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}
+# /home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}
 
 while getopts ":s:u:p:r:g:a:v:" opt; do
   case $opt in
@@ -57,7 +57,7 @@ sudo FACTER_app_version=$app_version \
      FACTER_app_repository=$app_repository \
      FACTER_app_group_id=$app_group_id \
      FACTER_app_artifact_id=$app_artifact_id \
-     FACTER_repo_url=$repo_url \
+     FACTER_repo_url=$repo_site \
      FACTER_repo_user=$repo_user \
      FACTER_repo_password=$repo_password \
      puppet apply init.pp --modulepath modules

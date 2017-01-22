@@ -86,7 +86,7 @@ resource "aws_instance" "web" {
           key_file = "${var.aws_key_path}"
         }
         source = "go.sh"
-        destination = "/home/ubuntu/go.sh ${var.repo_url} ${var.repo_user} ${var.repo_password} ${var.app_repository} ${var.app_group_id} ${var.app_artifact_id} ${var.app_version}"
+        destination = "/home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}"
     }
 
     provisioner "remote-exec" {

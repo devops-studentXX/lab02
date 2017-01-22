@@ -4,7 +4,7 @@ variable "aws_key_path" {}
 variable "aws_key_name" {}
 variable "aws_environment" {}
 
-variable "repo_url" {
+variable "repo_site" {
     default = "http://localhost:8081/nexus"
 }
 
