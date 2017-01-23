@@ -57,7 +57,7 @@ sudo FACTER_app_version=$app_version \
      FACTER_app_repository=$app_repository \
      FACTER_app_group_id=$app_group_id \
      FACTER_app_artifact_id=$app_artifact_id \
-     FACTER_repo_url=$repo_site \
+     FACTER_repo_site=$repo_site \
      FACTER_repo_user=$repo_user \
      FACTER_repo_password=$repo_password \
      puppet apply init.pp --modulepath modules
