@@ -96,12 +96,6 @@ resource "aws_instance" "web" {
     }
 
     provisioner "remote-exec" {
-#        connection {
-#          user = "ubuntu"
-#          host = "${aws_instance.web.public_ip}"
-#          timeout = "1m"
-#          key_file = "${var.aws_key_path}"
-#        }
         inline = [
           "chmod +x /home/ubuntu/go.sh",
           "/home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}"
@@ -110,7 +104,7 @@ resource "aws_instance" "web" {
 
 
     tags {
-        Name = "web-${count.index + 1}-${var.aws_environment}"
+        Name = "${var.aws_key_name}-web-${count.index + 1}-${var.aws_environment}"
         Env  = "${var.aws_environment}"
         test = "true"
     }
