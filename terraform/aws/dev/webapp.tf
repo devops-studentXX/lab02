@@ -67,7 +67,7 @@ resource "aws_security_group" "web" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    vpc_id = "${aws_vpc.default.id}"
+    vpc_id = "${var.vpc_id}"
 
     tags {
         Name = "WebServerSG"
@@ -86,7 +86,7 @@ resource "aws_instance" "web" {
     instance_type = "t2.micro"
     key_name = "${var.aws_key_name}"
     vpc_security_group_ids = ["${aws_security_group.web.id}"]
-    subnet_id = "${aws_subnet.eu-west-1a-public.id}"
+    subnet_id = "${var.public_subnet_id}"
     associate_public_ip_address = true
     source_dest_check = false
 
@@ -108,7 +108,7 @@ resource "aws_instance" "web" {
         Env  = "${var.aws_environment}"
         test = "true"
     }
-    count = 1
+    count = 2
 }
 
 resource "aws_eip" "web" {
