@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# /home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -r ${var.app_repository} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}
+# /home/ubuntu/go.sh -s ${var.repo_site} -u ${var.repo_user} -p ${var.repo_password} -g ${var.app_group_id} -a ${var.app_artifact_id} -v ${var.app_version}
 
 while getopts ":s:u:p:r:g:a:v:" opt; do
   case $opt in
@@ -15,10 +15,6 @@ while getopts ":s:u:p:r:g:a:v:" opt; do
     p)
       export repo_password=$OPTARG
       echo "-c was triggered, Parameter: $repo_password" >&2
-      ;;
-    r)
-      export app_repo=$OPTARG
-      echo "-d was triggered, Parameter: $app_repo" >&2
       ;;
     g)
       export app_group_id=$OPTARG
@@ -54,7 +50,6 @@ cd puppet
 bundle
 librarian-puppet install --clean
 sudo FACTER_app_version=$app_version \
-     FACTER_app_repository=$app_repository \
      FACTER_app_group_id=$app_group_id \
      FACTER_app_artifact_id=$app_artifact_id \
      FACTER_repo_site=$repo_site \
