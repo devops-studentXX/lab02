@@ -108,7 +108,7 @@ resource "aws_instance" "web" {
         Env  = "${var.aws_environment}"
         test = "true"
     }
-    count = 2
+    count = 1
 }
 
 resource "aws_eip" "web" {
