@@ -3,7 +3,7 @@ resource "aws_vpc" "default" {
     enable_dns_hostnames = true
     enable_dns_support = true
     tags {
-        Name = "${var.aws_key_name}-terraform-aws-vpc-${var.aws_environment}"
+        Name = "terraform-aws-vpc-${var.aws_environment}"
         Env  = "${var.aws_environment}"
     }
 }
@@ -87,7 +87,7 @@ resource "aws_instance" "nat" {
     source_dest_check = false
 
     tags {
-        Name = "${var.aws_key_name}-vpc-nat-${var.aws_environment}"
+        Name = "vpc-nat-${var.aws_environment}"
     }
 }
 
